@@ -106,8 +106,8 @@ var tpotMat = function(){
 		return dest;
 	},
 	lookAt: function(eye, center, up, dest){
-		var eyeX    = eye[0],    eyeY    = eye[1],    eyeZ    = eye[2],
-			upX     = up[0],     upY     = up[1],     upZ     = up[2],
+		var eyeX	= eye[0],	eyeY	= eye[1],	eyeZ	= eye[2],
+			upX	 = up[0],	 upY	 = up[1],	 upZ	 = up[2],
 			centerX = center[0], centerY = center[1], centerZ = center[2];
 		if(eyeX == centerX && eyeY == centerY && eyeZ == centerZ){return this.identity(dest);}
 		var x0, x1, x2, y0, y1, y2, z0, z1, z2, l;

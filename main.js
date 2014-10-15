@@ -30,11 +30,11 @@ onload = function(){
 	uniLocation[5] = gl.getUniformLocation(prg, 'texture');
 
 	// float texture ‚ð—LŒø‰»
-	var ext;
-	ext = gl.getExtension('OES_texture_float');
+	var format = gl.FLOAT;
+	var ext = gl.getExtension('OES_texture_float');
 	if(ext == null){
-		alert('float texture not supported');
-		return;
+		format = gl.UNSIGNED_BYTE;
+		alert("OES_texture_float is not supported!");
 	}
 	
     var prg_tonemap = tpotEngine.get_program(SHADER_TYPE.TONEMAP, gl);
@@ -47,7 +47,10 @@ onload = function(){
 	var ibo_tonemap = tpotEngine.create_ibo(
 		[0,1,2, 1,3,2], 
 		gl);
-	var fBuffer = tpotEngine.create_framebuffer(0, 0, gl);
+	var fBuffer = tpotEngine.create_framebuffer(0, 0, format, gl);
+	if(fBuffer == null && format == gl.FLOAT){
+		fBuffer = tpotEngine.create_framebuffer(0, 0, gl.UNSIGNED_BYTE, gl);
+	}
 	
 	var uniLocation_tonemap = new Array();
 	uniLocation_tonemap[0] = gl.getUniformLocation(prg_tonemap, 'texture');
